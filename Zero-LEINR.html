@@ -1,0 +1,118 @@
+<html>
+    <link rel="stylesheet" type="text/css" href="Zero-LEINR.css">  
+    <head> 
+        <title>ZERO-LEINR: ZERO-REFERENCE LOW-LIGHT IMAGE ENHANCEMENT WITH INTRINSIC NOISE REDUCTION</title>
+    </head>
+    <body> 
+       <div>
+            <h1>ZERO-LEINR: ZERO-REFERENCE LOW-LIGHT IMAGE ENHANCEMENT WITH INTRINSIC NOISE REDUCTION</h2>
+        </div>
+        <hr>
+        <div class="abstract">
+            <h2>Abstract</h2>
+            <p>Zero-reference deep learning-based methods for low-light image enhancement sufficiently mitigate  the difficulty of paired data collection while keeping the great generalization on various lighting conditions, but color bias and unintended intrinsic noise amplification are still issues that remain unsolved. In this paper, we propose a zero-reference end-to-end two-stage network (Zero-LEINR) for  low-light image enhancement with intrinsic noise reduction.  In the first stage, we introduce a Color Preservation and Light EnhancementBlock (CPLEB) that consists of a dual branch structure with different constraints to correct the brightness and preserve the correct color tone. In the second stage, Enhanced-NoiseReduction Block (ENRB) is applied to remove the  intrinsic noises being enhanced during the first stage. Due to the zero-reference two-stage structure, our method can enhance the  low-light image with the correct color tone on unseen datasets and reduce the intrinsic noise at the same time.</p>
+        </div>
+        <div class="method">
+            <h2>Proposed Method</h2>
+            <img class="img" src="image001.png" width="100%", height="auto">
+			<p>Overview of Zero-LEINR. CPLEB preserves the color while correcting the illuminance by combining the results from dual branches. ENRB removes the intrinsic noise enhanced unintendedly through a denoising network trained by two independent noisy pair subsampled from same noisy image. Dotted line indicate the paths used only in training stage.</p>
+        </div>
+        <div class="contribution">
+            <h2>Contributions</h2>
+			<ol>
+				<li>We propose a two-stage end-to-end solution for low-light image enhancement. At the first stage, a zero-reference low-light enhancer CPLEB is applied to boost the brightness and preserve the correct tone. Next, the unintendedly amplified noise can also be removed in a zero-reference manner by appending a denoiser ENRB. Our structure can alleviate the heavy burden of collecting training data.</li>
+				<li>We propose a simple but effective dual branch structure inspired by DCE-Net with different constraints to enhance the illumination while preserving the color during the low-light enhancement. Furthermore, this structure inherits the great ability of generalization and perform averagely well in unseen datasets.</li>
+		</div>
+        <div class="results">
+            <h2>Experimental Results</h2>
+			<ol>
+				<li>Image enhancement on the LOL dataset[1]. Compared with exiting state-of-the-art methods, our method achieves well performance(PSNR on y-axis) with few parameter(x-axis). </li>
+				<img class="img" src="image002.png" width="100%" height="auto">
+				<li>Qualitative Results </li>
+				<img class="img" src="image003.png" width="100%" height="auto">
+				<img class="img" src="image005.png" width="100%" height="auto">
+				<li>Demo video</li>
+				<video controls width="100%" height="auto">
+					<source src="demo.mp4" type="video/mp4">
+				</video>
+			</ol>
+        </div>
+        <div class="ablation-study">
+            <h2>Ablation Study</h2>
+			<ol>
+				<li>Table1 shows different setting with correspond PSNR,SSIM on LOL dataset[1].</li>
+				<table cellpadding="10" border='1' width="100%" style="max-width: 1000px;">
+				  <tr>
+					<th colspan="2">CPLEB</th>
+					<th rowspan="2">ENRB</th>
+					<th rowspan="2">PSNR/SSIM</th>
+				  </tr>
+				  <tr>
+					<th>Branch1</th>
+					<th>Branch2</th>
+				  </tr>
+				  <tr>
+					<td>&#10004</td>
+					<td>&#10008</td>
+					<td>&#10008</td>
+					<td>16.84/0.54</td>
+				  </tr>
+				  <tr>
+					<td>&#10008</td>
+					<td>&#10004</td>
+					<td>&#10008</td>
+					<td>9.79/0.39</td>
+				  </tr>
+				  <tr>
+					<td colspan="2">&#10004 <br>Only single branch</br></td>
+					<td>&#10008</td>
+					<td>9.85/0.40</td>
+				  </tr>
+				  <tr>
+					<td>&#10004</td>
+					<td>&#10004</td>
+					<td>&#10008</td>
+					<td>17.02/0.50</td>
+				  </tr>
+				  <tr>
+					<td>&#10004</td>
+					<td>&#10008</td>
+					<td>&#10004</td>
+					<td>16.97/0.76</td>
+				  </tr>
+				  <tr>
+					<td>&#10008</td>
+					<td>&#10004</td>
+					<td>&#10004</td>
+					<td>11.01/0.13</td>
+				  </tr>
+				  <tr>
+					<td colspan="2">&#10004 <br>Only single branch<br></td>
+					<td>&#10004</td>
+					<td>10.23/0.47</td>
+				  </tr>
+				  <tr>
+					<td>&#10004</td>
+					<td>&#10004</td>
+					<td>&#10004</td>
+					<td>18.02/0.78</td>
+				  </tr>
+				</table>
+				<li>Visual Comparisons</li>
+				<img class="img" src="image004.png" width="100%", height="auto">
+			<ol>
+		</div>
+        <div class="reference">
+            <h2>Reference</h2>
+            <ol>
+                <li>C. Wei, W. Wang, W. Yang, and J. Liu, “Deep retinex decomposition for low-light enhancement,” in British Machine Vision Conference, 2018.</li>
+				<li>X. Fu, D. Zeng, Y. Huang, X.-P. Zhang, and X. Ding, “A weighted variational model for simultaneous reflectance and illumination estimation,” in 2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2016, pp. 2782–2790.</li>
+                <li>M. Li, J. Liu, W. Yang, X. Sun, and Z. Guo, “Structure-revealing low-light image enhancement via robust retinex model,” IEEE Transactions on Image Processing, vol. 27, no. 6, pp. 2828–2841, 2018.</li>
+				<li>Li, X. Zhang, and D. Chen, “CSRNet: Dilated convolutional neural networks for understanding the highly congested scenes,” in Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), June 2018.</li>
+                <li>M. Afifi, K. G. Derpanis, B. Ommer, and M. S. Brown, “Learning multi-scale photo exposure correction,” in Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), June 2021, pp. 9157–9167.</li>
+				<li>Y. Jiang, X. Gong, D. Liu, Y. Cheng, C. Fang, X. Shen, J. Yang, Pan Zhou, and Z. Wang, “EnlightenGAN: Deep light enhancement without paired supervision,” IEEE Transactions on Image Processing, vol. 30, pp. 2340– 2349, 2021.</li>
+				<li>C. Guo, C. Li, J. Guo, C. C. Loy, J. Hou, S. Kwong, and R. Cong, “Zero-reference deep curve estimation for low-light image enhancement,” in Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), June 2020.</li>
+            </ol>
+        </div>
+    </body>
+</html>

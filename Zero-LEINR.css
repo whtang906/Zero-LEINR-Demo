@@ -1,0 +1,11 @@
+.ablation-study table{
+    text-align: center;
+    margin: auto;
+    border-collapse: collapse;
+}
+h2 {
+    text-align: center;
+}
+th {
+    background-color: rgb(243, 243, 243);
+}
